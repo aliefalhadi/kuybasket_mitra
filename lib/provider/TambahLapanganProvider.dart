@@ -11,7 +11,17 @@ class TambahLapanganProvider extends BaseProvider{
     "deskripsi" : ""
   };
 
+  List dataFasilitasLapangan = [];
+
   void dataInfoLapanganChanged({ String field, String value}){
       this.dataInfoLapangan[field] = value;
+  }
+
+  void addFasilitaslapangan(String fasilitas){
+    dataFasilitasLapangan.add(fasilitas);
+  }
+
+  void removeFasilitaslapangan(String fasilitas){
+    dataFasilitasLapangan.remove(fasilitas);
   }
 }

@@ -166,7 +166,7 @@ class _TambahInfoLapanganState extends State<TambahInfoLapangan> {
                             FocusScope.of(context).unfocus();
                             if(formKey.currentState.validate()){
                               print(jsonEncode(provider.dataInfoLapangan));
-                              Navigator.pushNamed(context, StringsRouterApp.tambahFasilitasLapangan);
+                              Navigator.pushNamed(context, StringsRouterApp.tambahFasilitasLapangan, arguments: provider);
                             }
                           },
                         ),
