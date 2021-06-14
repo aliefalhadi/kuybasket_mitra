@@ -162,11 +162,12 @@ class _TambahInfoLapanganState extends State<TambahInfoLapangan> {
                         child: RaisedButton(
                           color: Colors.blueAccent,
                           child: Text("Simpan", style: TextStyle(color: Colors.white),),
-                          onPressed: (){
+                          onPressed: () async{
                             FocusScope.of(context).unfocus();
                             if(formKey.currentState.validate()){
                               print(jsonEncode(provider.dataInfoLapangan));
-                              Navigator.pushNamed(context, StringsRouterApp.tambahFasilitasLapangan);
+                               Navigator.pushNamed(context, StringsRouterApp.tambahFasilitasLapangan, arguments: provider);
+                              // bool res = await provider.postTambahLapangan();
                             }
                           },
                         ),

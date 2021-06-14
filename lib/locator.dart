@@ -6,6 +6,7 @@ import 'package:flutterstarter/provider/TambahLapanganProvider.dart';
 import 'package:flutterstarter/services/ApiInterceptors.dart';
 import 'package:flutterstarter/services/AuthService.dart';
 import 'package:flutterstarter/services/DaftarTeamService.dart';
+import 'package:flutterstarter/services/LapanganService.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt locator = GetIt.instance;
@@ -16,6 +17,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => ApiInterceptors());
   locator.registerLazySingleton(() => AuthService());
   locator.registerLazySingleton(() => DaftarTeamService());
+  locator.registerLazySingleton(() => LapanganService());
 
 
 
