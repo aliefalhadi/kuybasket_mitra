@@ -34,80 +34,68 @@ class UserDataModel {
 
 class Data {
   Data({
-    this.id,
-    this.name,
-    this.noHp,
+    this.idUser,
     this.username,
     this.email,
-    this.userDetailId,
-    this.role,
+    this.nama,
+    this.noHp,
     this.dataPemilik,
     this.isSudahAdaLapangan,
+    this.totalNotifikasi,
   });
 
-  int id;
-  String name;
-  String noHp;
+  int idUser;
   String username;
   String email;
-  String userDetailId;
-  String role;
+  String nama;
+  String noHp;
   DataPemilik dataPemilik;
   bool isSudahAdaLapangan;
+  int totalNotifikasi;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    id: json["id"] == null ? null : json["id"],
-    name: json["name"] == null ? null : json["name"],
-    noHp: json["no_hp"] == null ? null : json["no_hp"],
+    idUser: json["id_user"] == null ? null : json["id_user"],
     username: json["username"] == null ? null : json["username"],
     email: json["email"] == null ? null : json["email"],
-    userDetailId: json["user_detail_id"] == null ? null : json["user_detail_id"],
-    role: json["role"] == null ? null : json["role"],
+    nama: json["nama"] == null ? null : json["nama"],
+    noHp: json["no_hp"] == null ? null : json["no_hp"],
     dataPemilik: json["data_pemilik"] == null ? null : DataPemilik.fromJson(json["data_pemilik"]),
     isSudahAdaLapangan: json["is_sudah_ada_lapangan"] == null ? null : json["is_sudah_ada_lapangan"],
+    totalNotifikasi: json["total_notifikasi"] == null ? null : json["total_notifikasi"],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id == null ? null : id,
-    "name": name == null ? null : name,
-    "no_hp": noHp == null ? null : noHp,
+    "id_user": idUser == null ? null : idUser,
     "username": username == null ? null : username,
     "email": email == null ? null : email,
-    "user_detail_id": userDetailId == null ? null : userDetailId,
-    "role": role == null ? null : role,
+    "nama": nama == null ? null : nama,
+    "no_hp": noHp == null ? null : noHp,
     "data_pemilik": dataPemilik == null ? null : dataPemilik.toJson(),
     "is_sudah_ada_lapangan": isSudahAdaLapangan == null ? null : isSudahAdaLapangan,
+    "total_notifikasi": totalNotifikasi == null ? null : totalNotifikasi,
   };
 }
 
 class DataPemilik {
   DataPemilik({
     this.idPemilikLapangan,
-    this.nik,
     this.nama,
-    this.noHp,
     this.alamat,
   });
 
   int idPemilikLapangan;
-  String nik;
   String nama;
-  String noHp;
   String alamat;
 
   factory DataPemilik.fromJson(Map<String, dynamic> json) => DataPemilik(
     idPemilikLapangan: json["id_pemilik_lapangan"] == null ? null : json["id_pemilik_lapangan"],
-    nik: json["nik"] == null ? null : json["nik"],
     nama: json["nama"] == null ? null : json["nama"],
-    noHp: json["no_hp"] == null ? null : json["no_hp"],
     alamat: json["alamat"] == null ? null : json["alamat"],
   );
 
   Map<String, dynamic> toJson() => {
     "id_pemilik_lapangan": idPemilikLapangan == null ? null : idPemilikLapangan,
-    "nik": nik == null ? null : nik,
     "nama": nama == null ? null : nama,
-    "no_hp": noHp == null ? null : noHp,
     "alamat": alamat == null ? null : alamat,
   };
 }

@@ -4,6 +4,7 @@ import 'package:flutterstarter/core/route/RouterApp.dart';
 import 'package:flutterstarter/locator.dart';
 import 'package:flutterstarter/provider/MainProvider.dart';
 import 'package:flutterstarter/views/Home.dart';
+import 'package:flutterstarter/views/HomeContainer.dart';
 import 'package:flutterstarter/views/Login.dart';
 import 'package:flutterstarter/views/lapangan/tambah_lapangan/TambahInfoLapangan.dart';
 
@@ -28,7 +29,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: initialRoute == 'login' ? Login() : initialRoute == 'tambah-lapangan' ? TambahInfoLapangan() : MyHomePage(title: 'asd',),
+      home: initialRoute == 'login' ? Login() : initialRoute == 'tambah-lapangan' ? TambahInfoLapangan() : HomeContainer(),
       onGenerateRoute: RouterApp.generateRoute,
       builder: EasyLoading.init(),
     );

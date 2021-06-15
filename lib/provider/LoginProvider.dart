@@ -57,11 +57,11 @@ class LoginProvider extends BaseProvider {
     sharedPreferences.setBool("isLogin", true);
     sharedPreferences.setString("username", data.data.username);
     sharedPreferences.setString("email", data.data.email);
-    sharedPreferences.setString("id_pengguna", data.data.id.toString());
+    sharedPreferences.setString("id_pengguna", data.data.idUser.toString());
     sharedPreferences.setString("id_pemilik_lapangan", data.data.dataPemilik.idPemilikLapangan.toString());
     sharedPreferences.setString("token", token);
     sharedPreferences.setString("data_user_login", jsonEncode(data));
-    // sharedPreferences.setInt("notif", data.sub.notif);
+    sharedPreferences.setInt("notif", data.data.totalNotifikasi);
 
 
 //    await OneSignal.shared.sendTag("id_pengguna", data.sub.pengguna.idpengguna);
