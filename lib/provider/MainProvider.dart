@@ -1,4 +1,6 @@
 import 'package:flutterstarter/Models/UserDataModel.dart';
+import 'package:flutterstarter/locator.dart';
+import 'package:flutterstarter/services/NotifikasiService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '';
 
@@ -23,6 +25,7 @@ class MainProvider {
        UserDataModel userDataModel = userDataModelFromJson(dataStorage);
 
        if(userDataModel.data.isSudahAdaLapangan){
+         await locator<NotifikasiService>().getTotalNotifUser();
          return 'home';
        }else{
         return 'tambah-lapangan';

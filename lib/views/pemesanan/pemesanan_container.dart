@@ -1,7 +1,13 @@
+import 'dart:developer';
+
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterstarter/locator.dart';
+import 'package:flutterstarter/services/EventBusService.dart';
 import 'package:flutterstarter/views/pemesanan/daftar_pemesanan_berhasil.dart';
 import 'package:flutterstarter/views/pemesanan/daftar_pemesanan_berlangsung.dart';
 import 'package:flutterstarter/views/pemesanan/daftar_pemesanan_selesai.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PemesananContainer extends StatefulWidget {
   const PemesananContainer({Key key}) : super(key: key);
@@ -18,7 +24,25 @@ class _PemesananContainerState extends State<PemesananContainer> with SingleTick
     // TODO: implement initState
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    getNotif();
   }
+
+  Future getNotif() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    setState(() {
+//      isUpdate = sharedPreferences.getBool('isUpdate');
+      locator<EventBusService>().totalNotif = sharedPreferences.getInt('notif');
+
+
+      if (locator<EventBusService>().totalNotif == 0) {
+        // FlutterAppBadger.removeBadge();
+      }
+
+      log(locator<EventBusService>().totalNotif.toString(), name: 'notif');
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +51,16 @@ class _PemesananContainerState extends State<PemesananContainer> with SingleTick
       appBar: AppBar(
         title: Text("KUYBASKET MITRA"),
         actions: [
-          IconButton(
-              icon: Icon(Icons.notifications),
-              onPressed: (){}
+          Badge(
+            showBadge:  locator<EventBusService>().totalNotif == 0 ?false : true,
+            badgeContent: Text( locator<EventBusService>().totalNotif.toString(), style: TextStyle(color: Colors.white, fontSize: 11),),
+            position: BadgePosition(top: 2,end: 8),
+            child: IconButton(
+                icon: Icon(Icons.notifications),
+                onPressed: (){
+                  Navigator.pushNamed(context, 'notifikasi');
+                }
+            ),
           )
         ],
         bottom: PreferredSize(

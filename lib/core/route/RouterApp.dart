@@ -7,6 +7,7 @@ import 'package:flutterstarter/views/Login.dart';
 import 'package:flutterstarter/views/lapangan/tambah_lapangan/TambahFasilitasLapangan.dart';
 import 'package:flutterstarter/views/lapangan/tambah_lapangan/TambahFotoLapangan.dart';
 import 'package:flutterstarter/views/lapangan/tambah_lapangan/TambahInfoLapangan.dart';
+import 'package:flutterstarter/views/notifikasi/daftar_notifikasi.dart';
 import 'package:flutterstarter/views/pemesanan/detail_pemesanan.dart';
 
 class RouterApp {
@@ -21,6 +22,9 @@ class RouterApp {
       case 'pemesanan/detail':
         final String idPemesanan = routeSettings.arguments;
         return MaterialPageRoute(builder: (_)=> DetailPemesanan(idPemesanan: idPemesanan,));
+        break;
+      case 'notifikasi':
+        return MaterialPageRoute(builder: (_)=> DaftarNotifikasi());
         break;
       case StringsRouterApp.tambahInfoLapangan :
         return MaterialPageRoute(builder: (_)=> TambahInfoLapangan());
