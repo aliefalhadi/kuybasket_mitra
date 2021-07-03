@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterstarter/views/pemesanan/pemesanan_container.dart';
+import 'package:flutterstarter/views/profile.dart';
 
 class HomeContainer extends StatefulWidget {
   const HomeContainer({Key key}) : super(key: key);
@@ -45,7 +46,7 @@ class _HomeContainerState extends State<HomeContainer> with SingleTickerProvider
         controller: _tabController,
         children: [
           PemesananContainer(),
-          Text("Prpfile")
+          Profile()
         ],
       )
     );

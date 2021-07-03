@@ -24,7 +24,9 @@ class NotifikasiService extends Service{
         DaftarNotifikasiModel daftarNotifikasiModel =
         daftarNotifikasiModelFromJson(jsonEncode(response.data));
 
+        print(daftarNotifikasiModel.data.isEmpty);
         if(daftarNotifikasiModel.data.isEmpty){
+          print('asd');
           throw ('data tidak ditemukan');
         }
 

@@ -21,15 +21,21 @@ class NotifikasiProvider extends BaseProvider {
       daftarNotifikasiModel =
           await _notifikasiService.getDaftarNotifikasi();
 
-
+      if(daftarNotifikasiModel.data.isEmpty){
+        setState(ViewState.FetchNull);
+      }else{
         setState(ViewState.Idle);
+      }
+
 
     } on SocketException catch (e) {
       setState(ViewState.ErrConnection);
     } catch (e) {
+      print('erer');
       if (e == 404 || e == 502 || e == 503) {
         setState(ViewState.ErrConnection);
       } else {
+        print('erer');
         setState(ViewState.FetchNull);
       }
     }
@@ -42,7 +48,7 @@ class NotifikasiProvider extends BaseProvider {
       int total = sharedPreferences.getInt('notif');
 
 
-        if(total > 1){
+        if(total >= 1){
           await  sharedPreferences.setInt('notif', total-1);
         }else{
           await  sharedPreferences.setInt('notif', 0);
