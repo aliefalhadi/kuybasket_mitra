@@ -15,6 +15,7 @@ class LoginProvider extends BaseProvider {
   UserDataModel data;
   AuthService _authService = locator<AuthService>();
   String errMessage;
+  var noHP;
   Map dataLogin = {
     'no_hp': '',
   };
@@ -67,6 +68,37 @@ class LoginProvider extends BaseProvider {
 //    await OneSignal.shared.sendTag("id_pengguna", data.sub.pengguna.idpengguna);
 //    await OneSignal.shared.sendTag("id_perangkat", data.sub.perangkat.uuid);
 //    await OneSignal.shared.sendTag("jabatan", data.sub.perangkat.dataJabatan.nama);
+  }
+
+  Future ubahNoHP() async{
+    try{
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      String id = sharedPreferences.getString("id_pengguna");
+      Map data = {
+        'id': id,
+        'no_hp': noHP,
+      };
+
+      bool res = await _authService.postUbahNoHP(data);
+      setState(ViewState.Fetching);
+      if (res) {
+        print("berhasil ubah no HP");
+        setState(ViewState.Idle);
+        return true;
+      } else {
+        print("provider no hp error");
+        setState(ViewState.Idle);
+        return false;
+      }
+
+    } catch (e){
+      print(e.toString());
+    }
+  }
+  
+  Future<String> logOut() async{
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.clear();
   }
 
 }

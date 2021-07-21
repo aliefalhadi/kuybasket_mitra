@@ -8,7 +8,8 @@ import 'package:flutterstarter/utils/ErrorDioHandler.dart';
 
 class Service {
   Dio dio = locator<ApiInterceptors>().dio;
-  String baseUrl = 'http://192.168.1.11/kuybasket_backend/api/v1';
+  // String baseUrl = 'http://172.20.10.3/kuybasket_backend/api/v1';
+  String baseUrl = 'http://api.kuybasket.golkarriau.com/v1';
 
 
   Future get(String url) async {

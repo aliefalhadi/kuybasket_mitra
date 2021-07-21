@@ -22,4 +22,18 @@ class AuthService extends Service{
       throw ('username / password anda salah');
     }
   }
+
+  Future postUbahNoHP(data) async{
+    try{
+      var url = '/auths/edit-nomor-hp';
+      print(data);
+      Response response = await post(url, data);
+      print(response.toString());
+      if (response.statusCode == 200) {
+        return true;
+      }
+    } catch(e){
+      print(e.toString());
+    }
+  }
 }

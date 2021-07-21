@@ -73,4 +73,14 @@ class LapanganService extends Service{
       }
     }
   }
+
+  Future postUbahStatusLapangan(var id) async{
+    try{
+      var url = 'lapangans/update-status';
+    } catch(e){
+      print(e.toString());
+    }
+  }
+
+
 }

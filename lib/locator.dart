@@ -5,6 +5,7 @@ import 'package:flutterstarter/provider/MainProvider.dart';
 import 'package:flutterstarter/provider/NotifikasiProvider.dart';
 import 'package:flutterstarter/provider/PemesananProvider.dart';
 import 'package:flutterstarter/provider/TambahLapanganProvider.dart';
+import 'package:flutterstarter/provider/UbahLapanganProvider.dart';
 import 'package:flutterstarter/services/ApiInterceptors.dart';
 import 'package:flutterstarter/services/AuthService.dart';
 import 'package:flutterstarter/services/DaftarTeamService.dart';
@@ -28,13 +29,13 @@ void setupLocator() {
   locator.registerLazySingleton(() => EventBusService());
 
 
-
   // provider
   locator.registerFactory(() => LoginProvider());
   locator.registerFactory(() => PemesananProvider());
   locator.registerFactory(() => HomeProvider());
   locator.registerFactory(() => MainProvider());
   locator.registerFactory(() => TambahLapanganProvider());
+  locator.registerFactory(() => UbahLapanganProvider());
   locator.registerFactory(() => NotifikasiProvider());
   locator.registerFactory(() => DaftarTeamLigaInggrisProvider());
 }

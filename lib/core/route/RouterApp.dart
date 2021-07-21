@@ -7,6 +7,8 @@ import 'package:flutterstarter/views/Login.dart';
 import 'package:flutterstarter/views/lapangan/tambah_lapangan/TambahFasilitasLapangan.dart';
 import 'package:flutterstarter/views/lapangan/tambah_lapangan/TambahFotoLapangan.dart';
 import 'package:flutterstarter/views/lapangan/tambah_lapangan/TambahInfoLapangan.dart';
+import 'package:flutterstarter/views/lapangan/ubah_lapangan/GantiNoHP.dart';
+import 'package:flutterstarter/views/lapangan/ubah_lapangan/UbahInfoLapangan.dart';
 import 'package:flutterstarter/views/notifikasi/daftar_notifikasi.dart';
 import 'package:flutterstarter/views/pemesanan/detail_pemesanan.dart';
 
@@ -36,6 +38,12 @@ class RouterApp {
       case StringsRouterApp.tambahFotoLapangan :
         TambahLapanganProvider tambahLapanganProvider = routeSettings.arguments;
         return MaterialPageRoute(builder: (_)=> TambahFotoLapangan(provider: tambahLapanganProvider,));
+        break;
+      case 'ubah-lapangan':
+        return MaterialPageRoute(builder: (_)=> UbahInfoLapangan());
+        break;
+      case 'ganti-nohp':
+        return MaterialPageRoute(builder: (_)=> GantiNoHP());
         break;
       default:
         return null;
