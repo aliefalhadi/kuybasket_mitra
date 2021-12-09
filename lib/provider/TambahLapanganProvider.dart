@@ -40,8 +40,8 @@ class TambahLapanganProvider extends BaseProvider{
   Future<bool> postTambahLapangan(List<File> foto2) async{
     try {
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      // dataInfoLapangan['pemilik_id'] = sharedPreferences.getString('id_pemilik_lapangan');
-      dataInfoLapangan['pemilik_id'] = '6';
+      dataInfoLapangan['pemilik_id'] = sharedPreferences.getString('id_pemilik_lapangan');
+      // dataInfoLapangan['pemilik_id'] = '6';
 
 
       var res = await _lapanganService.postTambahLapangan(jsonEncode(dataInfoLapangan));
@@ -76,6 +76,7 @@ class TambahLapanganProvider extends BaseProvider{
 
       UserDataModel userDataModel = userDataModelFromJson(dataStorage);
       userDataModel.data.isSudahAdaLapangan = true;
+      sharedPreferences.setBool('is_lapangan_buka', false);
       sharedPreferences.setString("data_user_login", jsonEncode(userDataModel));
 
       return true;

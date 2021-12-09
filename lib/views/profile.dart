@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutterstarter/provider/LoginProvider.dart';
-import 'package:flutterstarter/provider/UbahLapanganProvider.dart';
+import 'package:flutterstarter/provider/ProfileProvider.dart';
+import 'package:flutterstarter/shareds/ViewState.dart';
 import 'package:flutterstarter/views/BaseView.dart';
 
 class Profile extends StatefulWidget {
@@ -11,107 +13,132 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  @override
   LoginProvider loginProvider = LoginProvider();
   bool isSwitched = true;
 
   Widget build(BuildContext context) {
-    return BaseView<UbahLapanganProvider>(
-      builder: (context, provider, child) {
-        return Scaffold(
-          backgroundColor: Colors.white,
-          appBar: AppBar(
-            title: Text("Profile"),
-          ),
-          body: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom:
-                              BorderSide(color: Colors.grey.withOpacity(0.2)))),
-                      child: ListTile(
-                        leading: Icon(Icons.edit),
-                        title: Text("Status Lapangan"),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
+    return BaseView<ProfileProvider>(
+        onModelReady: (model) => model.init(),
+        builder: (context, provider, child) {
+          return Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              title: Text("Profile"),
+            ),
+            body: provider.state == ViewState.Fetching
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
                           children: [
-                            Text(
-                              isSwitched ? "Buka" : "Tutup",
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          color:
+                                              Colors.grey.withOpacity(0.2)))),
+                              child: ListTile(
+                                leading: Icon(Icons.edit),
+                                title: Text("Status Lapangan"),
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      provider.isSwitched ? "Buka" : "Tutup",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Switch(
+                                      value: provider.isSwitched,
+                                      onChanged: (value) {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                content:
+                                                    Text("Apakah anda yakin?"),
+                                                actions: [
+                                                  FlatButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: Text("Batal")),
+                                                  FlatButton
+                                                    (
+                                                      child: Text("Ya"),
+                                                    onPressed: () async{
+                                                        Navigator.pop(context);
+                                                        EasyLoading.show(status: "Loading...");
+                                                        bool res = await provider.postUpdateStatusLapangan();
+                                                        EasyLoading.dismiss();
+                                                        if(res){
+
+                                                          EasyLoading.showSuccess("Berhasil");
+                                                        }else{
+                                                          EasyLoading.showError("Gagal, silahkan coba lagi");
+                                                        }
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            });
+                                      },
+                                      activeTrackColor: Colors.lightBlueAccent,
+                                      activeColor: Colors.blueAccent,
+                                    )
+                                  ],
+                                ),
+                              ),
                             ),
-                            Switch(
-                              value: isSwitched,
-                              onChanged: (value) {
-                                setState(() {
-                                  isSwitched = !isSwitched;
-                                  print(isSwitched);
-                                });
-                              },
-                              activeTrackColor: Colors.lightBlueAccent,
-                              activeColor: Colors.blueAccent,
-                            )
-                            // SizedBox(
-                            //   width: 8,
-                            // ),
-                            // Icon(
-                            //   Icons.arrow_forward_ios_sharp,
-                            //   size: 18,
+                            // _Container(),
+                            // Container(
+                            //   decoration: BoxDecoration(
+                            //       border: Border(
+                            //           bottom:
+                            //           BorderSide(color: Colors.grey.withOpacity(0.2)))),
+                            //   child: ListTile(
+                            //     onTap: () {
+                            //       Navigator.pushNamed(context, 'ubah-lapangan');
+                            //     },
+                            //     leading: Icon(Icons.edit),
+                            //     title: Text("Ubah Data Lapangan"),
+                            //     trailing: Icon(
+                            //       Icons.arrow_forward_ios_sharp,
+                            //       size: 18,
+                            //     ),
+                            //   ),
                             // ),
                           ],
                         ),
-                      ),
-                    ),
-                    _Container(),
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom:
-                              BorderSide(color: Colors.grey.withOpacity(0.2)))),
-                      child: ListTile(
-                        onTap: () {
-                          Navigator.pushNamed(context, 'ubah-lapangan');
-                        },
-                        leading: Icon(Icons.edit),
-                        title: Text("Ubah Data Lapangan"),
-                        trailing: Icon(
-                          Icons.arrow_forward_ios_sharp,
-                          size: 18,
-                        ),
-                      ),
-                    ),
-                    _Container(),
-                  ],
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(
-                              color: Colors.grey.withOpacity(0.2)))),
-                  child: ListTile(
-                    onTap: () {
-                      // loginProvider.logOut();
-                      print(loginProvider.dataLogin);
-                    },
-                    leading: Icon(Icons.logout),
-                    title: Text("Keluar"),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios_sharp,
-                      size: 18,
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      color: Colors.grey.withOpacity(0.2)))),
+                          child: ListTile(
+                            onTap: () {
+                              loginProvider.logOut();
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, 'login', (route) => false);
+                            },
+                            leading: Icon(Icons.logout),
+                            title: Text("Keluar"),
+                            trailing: Icon(
+                              Icons.arrow_forward_ios_sharp,
+                              size: 18,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                )
-              ],
-            ),
-          ),
-        );
-      });
+          );
+        });
   }
-
 }
 
 // class showAlertDialogs extends StatefulWidget {

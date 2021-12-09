@@ -36,7 +36,7 @@ class _DaftarPemesananBerlangsungState
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
-                                Navigator.pushNamed(context, 'pemesanan/detail', arguments: provider.daftarPemesananModel.data[index].data.idPemesananLapangan.toString()).then((value) => provider.getDaftarPemesanan(status: 'berhasil'));;
+                                Navigator.pushNamed(context, 'pemesanan/detail', arguments: provider.daftarPemesananModel.data[index].data.idPemesananLapangan.toString()).then((value) => provider.getDaftarPemesanan(status: 'berlangsung'));
                               },
                               child: Container(
                                 margin: EdgeInsets.only(bottom: 8),

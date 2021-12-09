@@ -4,6 +4,7 @@ import 'package:flutterstarter/provider/LoginProvider.dart';
 import 'package:flutterstarter/provider/MainProvider.dart';
 import 'package:flutterstarter/provider/NotifikasiProvider.dart';
 import 'package:flutterstarter/provider/PemesananProvider.dart';
+import 'package:flutterstarter/provider/ProfileProvider.dart';
 import 'package:flutterstarter/provider/TambahLapanganProvider.dart';
 import 'package:flutterstarter/provider/UbahLapanganProvider.dart';
 import 'package:flutterstarter/services/ApiInterceptors.dart';
@@ -31,6 +32,7 @@ void setupLocator() {
 
   // provider
   locator.registerFactory(() => LoginProvider());
+  locator.registerFactory(() => ProfileProvider());
   locator.registerFactory(() => PemesananProvider());
   locator.registerFactory(() => HomeProvider());
   locator.registerFactory(() => MainProvider());

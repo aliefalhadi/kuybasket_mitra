@@ -42,6 +42,7 @@ class Data {
     this.dataPemilik,
     this.isSudahAdaLapangan,
     this.totalNotifikasi,
+    this.statusLapangan
   });
 
   int idUser;
@@ -49,6 +50,7 @@ class Data {
   String email;
   String nama;
   String noHp;
+  String statusLapangan;
   DataPemilik dataPemilik;
   bool isSudahAdaLapangan;
   int totalNotifikasi;
@@ -59,6 +61,7 @@ class Data {
     email: json["email"] == null ? null : json["email"],
     nama: json["nama"] == null ? null : json["nama"],
     noHp: json["no_hp"] == null ? null : json["no_hp"],
+    statusLapangan: json["status_lapangan"] == null ? null : json["status_lapangan"],
     dataPemilik: json["data_pemilik"] == null ? null : DataPemilik.fromJson(json["data_pemilik"]),
     isSudahAdaLapangan: json["is_sudah_ada_lapangan"] == null ? null : json["is_sudah_ada_lapangan"],
     totalNotifikasi: json["total_notifikasi"] == null ? null : json["total_notifikasi"],
@@ -70,6 +73,7 @@ class Data {
     "email": email == null ? null : email,
     "nama": nama == null ? null : nama,
     "no_hp": noHp == null ? null : noHp,
+    "status_lapangan": statusLapangan == null ? "" : statusLapangan,
     "data_pemilik": dataPemilik == null ? null : dataPemilik.toJson(),
     "is_sudah_ada_lapangan": isSudahAdaLapangan == null ? null : isSudahAdaLapangan,
     "total_notifikasi": totalNotifikasi == null ? null : totalNotifikasi,

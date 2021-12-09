@@ -74,11 +74,41 @@ class LapanganService extends Service{
     }
   }
 
-  Future postUbahStatusLapangan(var id) async{
-    try{
-      var url = 'lapangans/update-status';
-    } catch(e){
-      print(e.toString());
+  Future postUbahStatusLapangan(String id, var data) async{
+    try {
+      var url = '/lapangans/update-status/'+id;
+
+      var response = await post(url, data);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      if(error is DioError){
+        print(error.response.statusCode);
+        return false;
+      }
+    }
+  }
+
+  Future getDetailLapangan(var data) async {
+    try {
+      var url = '/lapangans/tambah-foto-lapangan';
+
+      var response = await postImage(url, data);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        return response;
+      } else {
+        throw ('data tidak ditemukan');
+      }
+    } catch (error) {
+      if(error is DioError){
+        print(error.response.statusCode);
+        throw(error.response.statusCode);
+      }
     }
   }
 

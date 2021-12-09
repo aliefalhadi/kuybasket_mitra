@@ -6,6 +6,7 @@ import 'package:flutterstarter/Models/DaftarTeamLigaInggrisModel.dart';
 import 'package:flutterstarter/Models/UserDataModel.dart';
 import 'package:flutterstarter/services/AuthService.dart';
 import 'package:flutterstarter/services/DaftarTeamService.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../locator.dart';
 import '../shareds/ViewState.dart';
@@ -32,7 +33,7 @@ class LoginProvider extends BaseProvider {
 
       UserDataModel dataLoginModel = userDataModelFromJson(ascii
           .decode(base64.decode(base64.normalize(response.data['token'].toString().split(".")[1]))));
-      print(dataLoginModel);
+
       Future.wait([saveSession(dataLoginModel, response.data['token'])]);
 
       if(dataLoginModel.data.isSudahAdaLapangan){
@@ -56,6 +57,7 @@ class LoginProvider extends BaseProvider {
   Future saveSession(UserDataModel data, token) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setBool("isLogin", true);
+    sharedPreferences.setBool("is_lapangan_buka", data.data.statusLapangan == "" || data.data.statusLapangan == "tutup" ? false :true );
     sharedPreferences.setString("username", data.data.username);
     sharedPreferences.setString("email", data.data.email);
     sharedPreferences.setString("id_pengguna", data.data.idUser.toString());
@@ -65,9 +67,8 @@ class LoginProvider extends BaseProvider {
     sharedPreferences.setInt("notif", data.data.totalNotifikasi);
 
 
-//    await OneSignal.shared.sendTag("id_pengguna", data.sub.pengguna.idpengguna);
-//    await OneSignal.shared.sendTag("id_perangkat", data.sub.perangkat.uuid);
-//    await OneSignal.shared.sendTag("jabatan", data.sub.perangkat.dataJabatan.nama);
+   await OneSignal.shared.sendTag("id_pengguna", data.data.idUser.toString());
+   await OneSignal.shared.sendTag("username", data.data.username);
   }
 
   Future ubahNoHP() async{
