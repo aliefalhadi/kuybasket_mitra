@@ -1,3 +1,4 @@
+import 'package:flutterstarter/provider/DaftarProvider.dart';
 import 'package:flutterstarter/provider/DaftarTeamLigaInggrisProvider.dart';
 import 'package:flutterstarter/provider/HomeProvider.dart';
 import 'package:flutterstarter/provider/LoginProvider.dart';
@@ -32,6 +33,7 @@ void setupLocator() {
 
   // provider
   locator.registerFactory(() => LoginProvider());
+  locator.registerFactory(() => DaftarProvider());
   locator.registerFactory(() => ProfileProvider());
   locator.registerFactory(() => PemesananProvider());
   locator.registerFactory(() => HomeProvider());

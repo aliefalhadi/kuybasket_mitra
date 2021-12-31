@@ -60,6 +60,22 @@ class PemesananProvider extends BaseProvider {
     }
   }
 
+  Future getDetailPemesananScan({String idPemesanan}) async {
+    try {
+      DetailPemesananModel detailPemesananModel =
+      await _pemesananService.getDetailPemesanan(idPemesanan: idPemesanan);
+      return detailPemesananModel;
+    } on SocketException catch (e) {
+      return null;
+    } catch (e) {
+      if (e == 404 || e == 502 || e == 503) {
+        return null;
+      } else {
+        return null;
+      }
+    }
+  }
+
   Future postKonfirmasiPemesanan({String idPemesanan, String status}) async {
     try {
       Map data = {

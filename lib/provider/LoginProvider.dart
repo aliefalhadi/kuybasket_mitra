@@ -5,8 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:flutterstarter/Models/DaftarTeamLigaInggrisModel.dart';
 import 'package:flutterstarter/Models/UserDataModel.dart';
 import 'package:flutterstarter/services/AuthService.dart';
-import 'package:flutterstarter/services/DaftarTeamService.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../locator.dart';
 import '../shareds/ViewState.dart';
@@ -67,8 +65,8 @@ class LoginProvider extends BaseProvider {
     sharedPreferences.setInt("notif", data.data.totalNotifikasi);
 
 
-   await OneSignal.shared.sendTag("id_pengguna", data.data.idUser.toString());
-   await OneSignal.shared.sendTag("username", data.data.username);
+   // await OneSignal.shared.sendTag("id_pengguna", data.data.idUser.toString());
+   // await OneSignal.shared.sendTag("username", data.data.username);
   }
 
   Future ubahNoHP() async{

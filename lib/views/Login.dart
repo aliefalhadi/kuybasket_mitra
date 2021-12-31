@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutterstarter/core/route/StringsRouterApp.dart';
 import 'package:flutterstarter/provider/LoginProvider.dart';
 import 'package:flutterstarter/views/BaseView.dart';
+import 'package:flutterstarter/views/DaftarView.dart';
 
 class Login extends StatefulWidget {
   const Login({Key key}) : super(key: key);
@@ -93,7 +94,21 @@ class _LoginState extends State<Login> {
                                 EasyLoading.showToast(provider.errMessage);
                               }
                             }),
-                      )
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: OutlineButton(
+                            color: Colors.blueAccent,
+                            child: Text(
+                              "Daftar Mitra",
+                            ),
+                            onPressed: () {
+                                Navigator.push(context,MaterialPageRoute(builder: (_)=>DaftarView()));
+                            }),
+                      ),
                     ],
                   ),
                 )

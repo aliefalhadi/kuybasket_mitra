@@ -40,7 +40,8 @@ dependencies:
   image_picker: ^0.6.7+22
   image_cropper:
   timeago: ^2.0.30
-  onesignal_flutter:
+  qr_code_scanner:
+  rflutter_alert:
 
 
   # The following adds the Cupertino Icons font to your application.

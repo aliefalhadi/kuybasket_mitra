@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterstarter/views/pemesanan/pemesanan_container.dart';
 import 'package:flutterstarter/views/profile.dart';
+import 'package:flutterstarter/views/scan.dart';
 
 class HomeContainer extends StatefulWidget {
   const HomeContainer({Key key}) : super(key: key);
@@ -17,7 +18,7 @@ class _HomeContainerState extends State<HomeContainer> with SingleTickerProvider
   void initState() {
     // TODO: implement initState
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
   @override
   Widget build(BuildContext context) {
@@ -37,6 +38,10 @@ class _HomeContainerState extends State<HomeContainer> with SingleTickerProvider
             label: "Pemesanan"
           ),
           BottomNavigationBarItem(
+              icon: Icon(Icons.qr_code_scanner),
+              label: "Scan"
+          ),
+          BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: "Profile"
           )
@@ -46,6 +51,7 @@ class _HomeContainerState extends State<HomeContainer> with SingleTickerProvider
         controller: _tabController,
         children: [
           PemesananContainer(),
+          ScanView(),
           Profile()
         ],
       )

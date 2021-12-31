@@ -29,6 +29,34 @@ class LapanganService extends Service{
     }
   }
 
+  Future postDaftarMitra(var data) async {
+    try {
+
+      print('sd3');
+      print(data.toString());
+
+      var url = '/lapangans/pendaftaran-mitra';
+
+      Response response = await postImage(url, data);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        print('asdsa23');
+        print(response.data['data']);
+        return response.data['data'];
+      } else {
+        throw ('data tidak ditemukan');
+      }
+    } on SocketException catch (_) {
+      throw SocketException('no_internet');
+    } catch (error) {
+      if (error is DioError) {
+        print(error.response.statusCode);
+        print(error.response.data['results']??error.response.data['message']);
+        throw (error.response.statusCode);
+      }
+    }
+  }
+
 
   Future postTambahFasilitasLapangan(var data) async {
     try {
